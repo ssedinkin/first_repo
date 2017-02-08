@@ -444,3 +444,58 @@ Date:   Thu Feb 9 01:37:37 2017 +0400
 tech@tech-work ~/first_repo $ git checkout -b feature1
 Переключено на новую ветку «feature1»
 tech@tech-work ~/first_repo $ vim fileB 
+tech@tech-work ~/first_repo $ vim task1.1_answer 
+tech@tech-work ~/first_repo $ git add fileB
+tech@tech-work ~/first_repo $ git add task1.1_answer 
+tech@tech-work ~/first_repo $ git commit -m 'task 12'
+[feature1 ad9f9c6] task 12
+ 2 files changed, 155 insertions(+)
+tech@tech-work ~/first_repo $ git push -u origin feature1
+Username for 'https://github.com': ssedinkin
+Password for 'https://ssedinkin@github.com': 
+Counting objects: 7, done.
+Delta compression using up to 4 threads.
+Compressing objects: 100% (3/3), done.
+Writing objects: 100% (4/4), 1.34 KiB | 0 bytes/s, done.
+Total 4 (delta 1), reused 0 (delta 0)
+remote: Resolving deltas: 100% (1/1), completed with 1 local objects.
+To https://github.com/ssedinkin/first_repo.git
+ * [new branch]      feature1 -> feature1
+Ветка feature1 отслеживает внешнюю ветку feature1 из origin.
+
+13. Во втором репозитории создай ветку feature2 из ветки master. 
+tech@tech-work ~/first_repo $ cd ../second_repo/
+tech@tech-work ~/second_repo $ git checkout -b feature2
+Переключено на новую ветку «feature2»
+
+14. Получи ветку feature1 во втором репозитории, влей изменения из неё в ветку master, обнови task1.1_answer, отправь изменения в центральный репозиторий.
+tech@tech-work ~/second_repo $ git pull
+remote: Counting objects: 9, done.
+remote: Compressing objects: 100% (3/3), done.
+remote: Total 4 (delta 1), reused 0 (delta 0)
+Unpacking objects: 100% (4/4), done.
+Из /home/tech/first_repo
+ * [новая ветка]     feature1   -> origin/feature1
+There is no tracking information for the current branch.
+Please specify which branch you want to merge with.
+See git-pull(1) for details
+
+    git pull <remote> <branch>
+
+If you wish to set tracking information for this branch you can do so with:
+
+    git branch --set-upstream-to=origin/<branch> feature2
+
+tech@tech-work ~/second_repo $ git pull origin feature1
+Из /home/tech/first_repo
+ * branch            feature1   -> FETCH_HEAD
+Обновление 1e76af3..ad9f9c6
+Fast-forward
+ fileB          |   1 +
+ task1.1_answer | 154 +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+ 2 files changed, 155 insertions(+)
+tech@tech-work ~/second_repo $ git checkout feature1
+Ветка feature1 отслеживает внешнюю ветку feature1 из origin.
+Переключено на новую ветку «feature1»
+tech@tech-work ~/second_repo $ git merge master
+Already up-to-date.
