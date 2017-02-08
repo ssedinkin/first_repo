@@ -40,3 +40,133 @@ tech@tech-work ~/first_repo $ git status
 Начальный коммит
 
 нечего коммитить (создайте/скопируйте файлы, затем запустите «git add», чтобы отслеживать их)
+
+7. Во втором репозитории создай файлы fileA и fileB с произвольной строкой текста в каждом. Добавь соответствующие команды в task1.1_answer. Просмотри статус репозитория. Сделай так, чтобы правки файлов fileA и fileB (но не task1.1_answer) попали в первый репозиторий. Просмотри статус репозитория.
+continued
+tech@tech-work ~/second_repo $ vim task1.1_answer 
+tech@tech-work ~/second_repo $ git status
+На ветке master
+Ваша ветка обновлена в соответствии с «origin/master».
+
+Изменения, которые не в индексе для коммита:
+  (используйте «git add <файл>…», чтобы добавить файл в индекс)
+  (используйте «git checkout -- <файл>…», чтобы отменить изменения
+   в рабочем каталоге)
+
+	изменено:                   task1.1_answer
+
+Неотслеживаемые файлы:
+  (используйте «git add <файл>…», чтобы добавить в то, что будет включено в коммит)
+
+	fileA
+	fileB
+
+нет изменений добавленных для коммита
+(используйте «git add» и/или «git commit -a»)
+tech@tech-work ~/second_repo $ git add fileA
+tech@tech-work ~/second_repo $ git add fileB
+tech@tech-work ~/second_repo $ git commit -m 'task 7'
+[master 91b1129] task 7
+ 2 files changed, 2 insertions(+)
+ create mode 100644 fileA
+ create mode 100644 fileB
+tech@tech-work ~/second_repo $ git push
+warning: push.default is unset; its implicit value is changing in
+Git 2.0 from 'matching' to 'simple'. To squelch this message
+and maintain the current behavior after the default changes, use:
+
+  git config --global push.default matching
+
+To squelch this message and adopt the new behavior now, use:
+
+  git config --global push.default simple
+
+When push.default is set to 'matching', git will push local branches
+to the remote branches that already exist with the same name.
+
+In Git 2.0, Git will default to the more conservative 'simple'
+behavior, which only pushes the current branch to the corresponding
+remote branch that 'git pull' uses to update the current branch.
+
+See 'git help config' and search for 'push.default' for further information.
+(the 'simple' mode was introduced in Git 1.7.11. Use the similar mode
+'current' instead of 'simple' if you sometimes use older versions of Git)
+
+Counting objects: 5, done.
+Delta compression using up to 4 threads.
+Compressing objects: 100% (2/2), done.
+Writing objects: 100% (4/4), 348 bytes | 0 bytes/s, done.
+Total 4 (delta 0), reused 0 (delta 0)
+remote: error: refusing to update checked out branch: refs/heads/master
+remote: error: By default, updating the current branch in a non-bare repository
+remote: error: is denied, because it will make the index and work tree inconsistent
+remote: error: with what you pushed, and will require 'git reset --hard' to match
+remote: error: the work tree to HEAD.
+remote: error: 
+remote: error: You can set 'receive.denyCurrentBranch' configuration variable to
+remote: error: 'ignore' or 'warn' in the remote repository to allow pushing into
+remote: error: its current branch; however, this is not recommended unless you
+remote: error: arranged to update its work tree to match what you pushed in some
+remote: error: other way.
+remote: error: 
+remote: error: To squelch this message and still keep the default behaviour, set
+remote: error: 'receive.denyCurrentBranch' configuration variable to 'refuse'.
+To /home/tech/first_repo
+ ! [remote rejected] master -> master (branch is currently checked out)
+error: не удалось отправить некоторые ссылки в «/home/tech/first_repo»
+tech@tech-work ~/second_repo $ cd ../first_repo/
+tech@tech-work ~/first_repo $ git config --local receive.denyCurrentBranch ignore
+tech@tech-work ~/first_repo $ cd ../second_repo/
+tech@tech-work ~/second_repo $ git push
+warning: push.default is unset; its implicit value is changing in
+Git 2.0 from 'matching' to 'simple'. To squelch this message
+and maintain the current behavior after the default changes, use:
+
+  git config --global push.default matching
+
+To squelch this message and adopt the new behavior now, use:
+
+  git config --global push.default simple
+
+When push.default is set to 'matching', git will push local branches
+to the remote branches that already exist with the same name.
+
+In Git 2.0, Git will default to the more conservative 'simple'
+behavior, which only pushes the current branch to the corresponding
+remote branch that 'git pull' uses to update the current branch.
+
+See 'git help config' and search for 'push.default' for further information.
+(the 'simple' mode was introduced in Git 1.7.11. Use the similar mode
+'current' instead of 'simple' if you sometimes use older versions of Git)
+
+Counting objects: 5, done.
+Delta compression using up to 4 threads.
+Compressing objects: 100% (2/2), done.
+Writing objects: 100% (4/4), 348 bytes | 0 bytes/s, done.
+Total 4 (delta 0), reused 0 (delta 0)
+To /home/tech/first_repo
+   1d45690..91b1129  master -> master
+tech@tech-work ~/second_repo $ git status
+На ветке master
+Ваша ветка обновлена в соответствии с «origin/master».
+
+Изменения, которые не в индексе для коммита:
+  (используйте «git add <файл>…», чтобы добавить файл в индекс)
+  (используйте «git checkout -- <файл>…», чтобы отменить изменения
+   в рабочем каталоге)
+
+	изменено:                   task1.1_answer
+
+нет изменений добавленных для коммита
+(используйте «git add» и/или «git commit -a»)
+
+8. В первом репозитории добавь в fileA ещё одну строчку текста. Просмотри текущие изменения в этом файле. fileB удали. Добавь соответствующие команды в task1.1_answer. Отправь правки в центральный репозиторий.
+tech@tech-work ~/second_repo $ cd ../first_repo/
+tech@tech-work ~/first_repo $ git reset --hard
+HEAD сейчас на 91b1129 task 7
+tech@tech-work ~/first_repo $ vim fileA
+tech@tech-work ~/first_repo $ cat fileA 
+fai2YaCh
+neiKaif1
+tech@tech-work ~/first_repo $ git rm fileB
+rm 'fileB'
