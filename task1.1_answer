@@ -40,3 +40,62 @@ tech@tech-work ~/first_repo $ git status
 Начальный коммит
 
 нечего коммитить (создайте/скопируйте файлы, затем запустите «git add», чтобы отслеживать их)
+
+5. Создай в репозитории файл task1.1_answer. Этот файл будет ответом на упражнение и должен содержать все выполняемые команды и их вывод по каждому пункту задания. Впиши в этот файл уже выполненные команды и их результат. Зафиксируй выполненные правки и отправь их в центральный репозиторий.
+tech@tech-work ~/first_repo $ vim task1.1_answer
+tech@tech-work ~/first_repo $ vim task1.1_answer
+tech@tech-work ~/first_repo $ git add task1.1_answer
+tech@tech-work ~/first_repo $ git commit -m 'task 5'
+[master (корневой коммит) 1d45690] task 5
+ 1 file changed, 42 insertions(+)
+ create mode 100644 task1.1_answer
+tech@tech-work ~/first_repo $ git push -u origin master
+Username for 'https://github.com': ssedinkin
+Password for 'https://ssedinkin@github.com': 
+Counting objects: 3, done.
+Delta compression using up to 4 threads.
+Compressing objects: 100% (2/2), done.
+Writing objects: 100% (3/3), 1.27 KiB | 0 bytes/s, done.
+Total 3 (delta 0), reused 0 (delta 0)
+To https://github.com/ssedinkin/first_repo.git
+ * [new branch]      master -> master
+Ветка master отслеживает внешнюю ветку master из origin.
+
+6. Склонируй репозиторий в другую директорию/на другую машину (дальше будем называть его вторым).
+tech@tech-work ~/first_repo $ cd ..
+tech@tech-work ~ $ git clone first_repo second_repo
+Клонирование в «second_repo»…
+готово.
+tech@tech-work ~ $ ls | grep repo
+first_repo
+second_repo
+
+7. Во втором репозитории создай файлы fileA и fileB с произвольной строкой текста в каждом. Добавь соответствующие команды в task1.1_answer. Просмотри статус репозитория. Сделай так, чтобы правки файлов fileA и fileB (но не task1.1_answer) попали в первый репозиторий. Просмотри статус репозитория.
+tech@tech-work ~ $ cd second_repo/
+tech@tech-work ~/second_repo $ echo fai2YaCh > fileA
+tech@tech-work ~/second_repo $ echo Muo1xuth > fileB
+tech@tech-work ~/second_repo $ cat fileA
+fai2YaCh
+tech@tech-work ~/second_repo $ cat fileB
+Muo1xuth
+
+8. В первом репозитории добавь в fileA ещё одну строчку текста. Просмотри текущие изменения в этом файле. fileB удали. Добавь соответствующие команды в task1.1_answer. Отправь правки в центральный репозиторий.
+continued
+tech@tech-work ~/first_repo $ vim task1.1_answer 
+tech@tech-work ~/first_repo $ git add fileA 
+tech@tech-work ~/first_repo $ git add task1.1_answer 
+tech@tech-work ~/first_repo $ git commit -m 'task 8'
+[master 140ba8a] task 8
+ 3 files changed, 131 insertions(+), 1 deletion(-)
+ delete mode 100644 fileB
+tech@tech-work ~/first_repo $ git push -u origin master
+Username for 'https://github.com': ssedinkin
+Password for 'https://ssedinkin@github.com': 
+Counting objects: 10, done.
+Delta compression using up to 4 threads.
+Compressing objects: 100% (5/5), done.
+Writing objects: 100% (8/8), 3.15 KiB | 0 bytes/s, done.
+Total 8 (delta 0), reused 0 (delta 0)
+To https://github.com/ssedinkin/first_repo.git
+   1d45690..140ba8a  master -> master
+Ветка master отслеживает внешнюю ветку master из origin.
