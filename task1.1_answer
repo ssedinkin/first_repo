@@ -289,4 +289,158 @@ tech@tech-work ~/second_repo $ git status
 	оба измены:task1.1_answer
 
 tech@tech-work ~/second_repo $ git add task1.1_answer
+tech@tech-work ~/second_repo $ git tag v1
+tech@tech-work ~/second_repo $ git commit -m 'task 9'
+[master 9593f38] task 9
+tech@tech-work ~/second_repo $ git tag v2
+tech@tech-work ~/second_repo $ git push
+warning: push.default is unset; its implicit value is changing in
+Git 2.0 from 'matching' to 'simple'. To squelch this message
+and maintain the current behavior after the default changes, use:
 
+  git config --global push.default matching
+
+To squelch this message and adopt the new behavior now, use:
+
+  git config --global push.default simple
+
+When push.default is set to 'matching', git will push local branches
+to the remote branches that already exist with the same name.
+
+In Git 2.0, Git will default to the more conservative 'simple'
+behavior, which only pushes the current branch to the corresponding
+remote branch that 'git pull' uses to update the current branch.
+
+See 'git help config' and search for 'push.default' for further information.
+(the 'simple' mode was introduced in Git 1.7.11. Use the similar mode
+'current' instead of 'simple' if you sometimes use older versions of Git)
+
+Counting objects: 10, done.
+Delta compression using up to 4 threads.
+Compressing objects: 100% (6/6), done.
+Writing objects: 100% (6/6), 2.25 KiB | 0 bytes/s, done.
+Total 6 (delta 3), reused 0 (delta 0)
+To /home/tech/first_repo
+   140ba8a..9593f38  master -> master
+tech@tech-work ~/second_repo $ ls
+fileA  task1.1_answer
+
+10. В первом репозитории восстанови файл fileB, отправь его в центральный репозиторий.
+tech@tech-work ~/second_repo $ cd ../first_repo/
+tech@tech-work ~/first_repo $ git reset --hard
+HEAD сейчас на 9593f38 task 9
+tech@tech-work ~/first_repo $ git rev-list -n 1 HEAD -- fileB
+140ba8a2cac1d372ddb6617f625a343fd8c768d0
+tech@tech-work ~/first_repo $ git checkout 140ba8a2cac1d372ddb6617f625a343fd8c768d0^ -- fileB
+tech@tech-work ~/first_repo $ git add fileB
+tech@tech-work ~/first_repo $ git commit -m 'task 10'
+[master 1e76af3] task 10
+ 1 file changed, 1 insertion(+)
+ create mode 100644 fileB
+tech@tech-work ~/first_repo $ git push -u origin master
+Username for 'https://github.com': ssedinkin
+Password for 'https://ssedinkin@github.com': 
+Counting objects: 12, done.
+Delta compression using up to 4 threads.
+Compressing objects: 100% (8/8), done.
+Writing objects: 100% (8/8), 2.53 KiB | 0 bytes/s, done.
+Total 8 (delta 3), reused 0 (delta 0)
+remote: Resolving deltas: 100% (3/3), completed with 2 local objects.
+To https://github.com/ssedinkin/first_repo.git
+   140ba8a..1e76af3  master -> master
+Ветка master отслеживает внешнюю ветку master из origin.
+
+11. Приведи оба репозитория к одинаковому финальному состоянию. Посмотри лог в первом и втором репозитории.
+tech@tech-work ~/first_repo $ cd ../second_repo/
+tech@tech-work ~/second_repo $ git pull
+remote: Counting objects: 4, done.
+remote: Compressing objects: 100% (2/2), done.
+remote: Total 3 (delta 0), reused 0 (delta 0)
+Unpacking objects: 100% (3/3), done.
+Из /home/tech/first_repo
+   9593f38..1e76af3  master     -> origin/master
+Обновление 9593f38..1e76af3
+Fast-forward
+ fileB | 1 +
+ 1 file changed, 1 insertion(+)
+ create mode 100644 fileB
+tech@tech-work ~/second_repo $ git log --all
+commit 1e76af3f335f46aaf524b34ce6ced5ce2a5a607f
+Author: Сединкин Сергей <s.sedinkin@reg.ru>
+Date:   Thu Feb 9 02:25:46 2017 +0400
+
+    task 10
+
+commit 9593f38d735585025580f29c6e66fd25ce7d8272
+Merge: 507c002 140ba8a
+Author: Сединкин Сергей <s.sedinkin@reg.ru>
+Date:   Thu Feb 9 02:13:15 2017 +0400
+
+    task 9
+
+commit 507c0025b538f1e2c800dfc30e18029372d6b81d
+Author: Сединкин Сергей <s.sedinkin@reg.ru>
+Date:   Thu Feb 9 02:02:38 2017 +0400
+
+    task 9
+
+commit 140ba8a2cac1d372ddb6617f625a343fd8c768d0
+Author: Сединкин Сергей <s.sedinkin@reg.ru>
+Date:   Thu Feb 9 01:56:39 2017 +0400
+
+    task 8
+
+commit 91b112902203e4871c1f630b0fecdd7b6d51253e
+Author: Сединкин Сергей <s.sedinkin@reg.ru>
+Date:   Thu Feb 9 01:46:39 2017 +0400
+
+    task 7
+
+commit 1d4569029d7292dba28b66d550d87e808539c2db
+Author: Сединкин Сергей <s.sedinkin@reg.ru>
+Date:   Thu Feb 9 01:37:37 2017 +0400
+
+    task 5
+tech@tech-work ~/first_repo $ cd ../first_repo/
+tech@tech-work ~/first_repo $ git log --all
+commit 1e76af3f335f46aaf524b34ce6ced5ce2a5a607f
+Author: Сединкин Сергей <s.sedinkin@reg.ru>
+Date:   Thu Feb 9 02:25:46 2017 +0400
+
+    task 10
+
+commit 9593f38d735585025580f29c6e66fd25ce7d8272
+Merge: 507c002 140ba8a
+Author: Сединкин Сергей <s.sedinkin@reg.ru>
+Date:   Thu Feb 9 02:13:15 2017 +0400
+
+    task 9
+
+commit 507c0025b538f1e2c800dfc30e18029372d6b81d
+Author: Сединкин Сергей <s.sedinkin@reg.ru>
+Date:   Thu Feb 9 02:02:38 2017 +0400
+
+    task 9
+
+commit 140ba8a2cac1d372ddb6617f625a343fd8c768d0
+Author: Сединкин Сергей <s.sedinkin@reg.ru>
+Date:   Thu Feb 9 01:56:39 2017 +0400
+
+    task 8
+
+commit 91b112902203e4871c1f630b0fecdd7b6d51253e
+Author: Сединкин Сергей <s.sedinkin@reg.ru>
+Date:   Thu Feb 9 01:46:39 2017 +0400
+
+    task 7
+
+commit 1d4569029d7292dba28b66d550d87e808539c2db
+Author: Сединкин Сергей <s.sedinkin@reg.ru>
+Date:   Thu Feb 9 01:37:37 2017 +0400
+
+    task 5
+
+12. Создай в первом репозитории ветку feature1. Добавь произвольную строку в файл fileB, обнови task1.1_answer и отправь в центральный репозиторий.
+tech@tech-work ~/first_repo $ git checkout -b feature1
+Переключено на новую ветку «feature1»
+tech@tech-work ~/first_repo $ vim fileB 
