@@ -499,3 +499,30 @@ tech@tech-work ~/second_repo $ git checkout feature1
 Переключено на новую ветку «feature1»
 tech@tech-work ~/second_repo $ git merge master
 Already up-to-date.
+vim task1.1_answer
+tech@tech-work ~/second_repo $ git remote add github https://github.com/ssedinkin/first_repo.git
+tech@tech-work ~/second_repo $ git add task1.1_answer 
+tech@tech-work ~/second_repo $ git commit -m 'task 14'
+[feature2 36e460b] task 14
+ 1 file changed, 55 insertions(+)
+tech@tech-work ~/second_repo $ git push -u github feature1
+Username for 'https://github.com': ssedinkin
+Password for 'https://ssedinkin@github.com': 
+Ветка feature1 отслеживает внешнюю ветку feature1 из github.
+Everything up-to-date
+
+15. Во втором репозитории переключись на ветку feature2. Просмотри список веток локально и в центральном репозитории. Обнови task1.1_answer, отправь в центральный репозиторий.
+tech@tech-work ~/second_repo $ git checkout feature2
+Переключено на ветку «feature2»
+tech@tech-work ~/second_repo $ git fetch
+Из .
+ * branch            github     -> FETCH_HEAD
+tech@tech-work ~/second_repo $ git branch -a
+  feature1
+* feature2
+  github
+  master
+  remotes/github/feature1
+  remotes/origin/HEAD -> origin/master
+  remotes/origin/feature1
+  remotes/origin/master
