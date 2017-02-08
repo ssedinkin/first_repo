@@ -1,0 +1,42 @@
+1. Создай локальный репозиторий (дальше будем называть его первым).
+tech@tech-work ~ $ mkdir first_repo
+tech@tech-work ~ $ cd first_repo/
+tech@tech-work ~/first_repo $ git init
+Инициализирован пустой репозиторий Git в /home/tech/first_repo/.git/
+
+2. Настрой имя пользователя (Фамилия Имя по-русски) и емейл (корпоративный емейл в домене reg.ru) для коммитера. Убедись, что они установлены верно, выведя соответствующие конфигурационные параметры.
+tech@tech-work ~/first_repo $ git config --global user.name "Сединкин Сергей"
+tech@tech-work ~/first_repo $ git config --global user.email "s.sedinkin@reg.ru"
+tech@tech-work ~/first_repo $ git config --get user.name
+Сединкин Сергей
+tech@tech-work ~/first_repo $ git config --get user.email
+s.sedinkin@reg.ru
+
+3. Опубликуй репозиторий на Github (дальше будем называть его центральным).
+tech@tech-work ~/first_repo $ git remote add origin https://github.com/ssedinkin/first_repo.git
+tech@tech-work ~/first_repo $ git push -u origin master
+Username for 'https://github.com': ssedinkin
+Password for 'https://ssedinkin@github.com': 
+error: src refspec master does not match any.
+error: не удалось отправить некоторые ссылки в «https://github.com/ssedinkin/first_repo.git»
+
+4. Создай в каталоге с репозиторием файл task1.1, скопируй в него текст этого задания. Посмотри статус репозитория. Сделай так, чтобы это файл никогда не попал в репозиторий и не обрабатывался никакими командами git. Просмотри ещё раз статус репозитория.
+tech@tech-work ~/first_repo $ vim task1.1
+tech@tech-work ~/first_repo $ git status
+На ветке master
+
+Начальный коммит
+
+Неотслеживаемые файлы:
+  (используйте «git add <файл>…», чтобы добавить в то, что будет включено в коммит)
+
+	task1.1
+
+ничего не добавлено в коммит, но есть неотслеживаемые файлы (используйте «git add», чтобы отслеживать их)
+tech@tech-work ~/first_repo $ vim .gitignore
+tech@tech-work ~/first_repo $ git status
+На ветке master
+
+Начальный коммит
+
+нечего коммитить (создайте/скопируйте файлы, затем запустите «git add», чтобы отслеживать их)
