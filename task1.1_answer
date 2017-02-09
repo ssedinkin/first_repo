@@ -499,3 +499,141 @@ tech@tech-work ~/second_repo $ git checkout feature1
 Переключено на новую ветку «feature1»
 tech@tech-work ~/second_repo $ git merge master
 Already up-to-date.
+vim task1.1_answer
+tech@tech-work ~/second_repo $ git remote add github https://github.com/ssedinkin/first_repo.git
+tech@tech-work ~/second_repo $ git add task1.1_answer 
+tech@tech-work ~/second_repo $ git commit -m 'task 14'
+[feature2 36e460b] task 14
+ 1 file changed, 55 insertions(+)
+tech@tech-work ~/second_repo $ git push -u github feature1
+Username for 'https://github.com': ssedinkin
+Password for 'https://ssedinkin@github.com': 
+Ветка feature1 отслеживает внешнюю ветку feature1 из github.
+Everything up-to-date
+
+15. Во втором репозитории переключись на ветку feature2. Просмотри список веток локально и в центральном репозитории. Обнови task1.1_answer, отправь в центральный репозиторий.
+tech@tech-work ~/second_repo $ git checkout feature2
+Переключено на ветку «feature2»
+tech@tech-work ~/second_repo $ git fetch
+Из .
+ * branch            github     -> FETCH_HEAD
+tech@tech-work ~/second_repo $ git branch -a
+  feature1
+* feature2
+  github
+  master
+  remotes/github/feature1
+  remotes/origin/HEAD -> origin/master
+  remotes/origin/feature1
+  remotes/origin/master
+tech@tech-work ~/second_repo $ vim task1.1_answer 
+tech@tech-work ~/second_repo $ git push github feature2
+Username for 'https://github.com': ssedinkin
+Password for 'https://ssedinkin@github.com': 
+Everything up-to-date
+
+16. В первом репозитории получи все изменения из центрального репозитория. Верни ветку master к состоянию до слияния с веткой feature1. Влей в master ветку feature2. task1.1_answer после слияния должен содержать все изменения, выполненные в любых ветках.
+tech@tech-work ~ $ cd ../first_repo/
+tech@tech-work ~/first_repo $ git pull origin feature2
+Из https://github.com/ssedinkin/first_repo
+ * branch            feature2   -> FETCH_HEAD
+Обновление 1e76af3..cbcd5aa
+Fast-forward
+ fileB          |   1 +
+ task1.1_answer | 236 +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+ 2 files changed, 237 insertions(+)
+tech@tech-work ~/first_repo $ git checkout master
+Переключено на ветку «master»
+Ваша ветка опережает «origin/master» на 3 коммита.
+  (используйте «git push», чтобы опубликовать ваши локальные коммиты)
+tech@tech-work ~/first_repo $ git log
+commit cbcd5aacfe8219c2c4981eb11ba78636f6c84b44
+Author: Сединкин Сергей <s.sedinkin@reg.ru>
+Date:   Thu Feb 9 03:32:24 2017 +0400
+
+    task 15
+
+commit 36e460bbfb3be7c5e912fbeb2b878c9b1eaffd42
+Author: Сединкин Сергей <s.sedinkin@reg.ru>
+Date:   Thu Feb 9 03:13:53 2017 +0400
+
+    task 14
+
+commit ad9f9c669bcadfe2e11fa6d7b35050cadaa34b15
+Author: Сединкин Сергей <s.sedinkin@reg.ru>
+Date:   Thu Feb 9 02:42:46 2017 +0400
+
+    task 12
+
+commit 1e76af3f335f46aaf524b34ce6ced5ce2a5a607f
+Author: Сединкин Сергей <s.sedinkin@reg.ru>
+Date:   Thu Feb 9 02:25:46 2017 +0400
+
+    task 10
+
+commit 9593f38d735585025580f29c6e66fd25ce7d8272
+Merge: 507c002 140ba8a
+Author: Сединкин Сергей <s.sedinkin@reg.ru>
+Date:   Thu Feb 9 02:13:15 2017 +0400
+
+    task 9
+
+commit 507c0025b538f1e2c800dfc30e18029372d6b81d
+Author: Сединкин Сергей <s.sedinkin@reg.ru>
+Date:   Thu Feb 9 02:02:38 2017 +0400
+
+    task 9
+
+commit 140ba8a2cac1d372ddb6617f625a343fd8c768d0
+Author: Сединкин Сергей <s.sedinkin@reg.ru>
+Date:   Thu Feb 9 01:56:39 2017 +0400
+
+    task 8
+
+commit 91b112902203e4871c1f630b0fecdd7b6d51253e
+Author: Сединкин Сергей <s.sedinkin@reg.ru>
+Date:   Thu Feb 9 01:46:39 2017 +0400
+
+    task 7
+
+commit 1d4569029d7292dba28b66d550d87e808539c2db
+Author: Сединкин Сергей <s.sedinkin@reg.ru>
+Date:   Thu Feb 9 01:37:37 2017 +0400
+
+tech@tech-work ~/first_repo $ git checkout 36e460bbfb3be7c5e912fbeb2b878c9b1eaffd42
+Note: checking out '36e460bbfb3be7c5e912fbeb2b878c9b1eaffd42'.
+
+You are in 'detached HEAD' state. You can look around, make experimental
+changes and commit them, and you can discard any commits you make in this
+state without impacting any branches by performing another checkout.
+
+If you want to create a new branch to retain commits you create, you may
+do so (now or later) by using -b with the checkout command again. Example:
+
+  git checkout -b new_branch_name
+
+HEAD сейчас на 36e460b... task 14
+tech@tech-work ~/first_repo $ git checkout feature2 -- task1.1_answer
+
+17. Просмотри графический лог. Удали ветку feature1 (в том числе из центрального репозитория).
+tech@tech-work ~/first_repo $ git log --graph --pretty=oneline
+* cbcd5aacfe8219c2c4981eb11ba78636f6c84b44 task 15
+* 36e460bbfb3be7c5e912fbeb2b878c9b1eaffd42 task 14
+* ad9f9c669bcadfe2e11fa6d7b35050cadaa34b15 task 12
+* 1e76af3f335f46aaf524b34ce6ced5ce2a5a607f task 10
+*   9593f38d735585025580f29c6e66fd25ce7d8272 task 9
+|\  
+| * 140ba8a2cac1d372ddb6617f625a343fd8c768d0 task 8
+* | 507c0025b538f1e2c800dfc30e18029372d6b81d task 9
+|/  
+* 91b112902203e4871c1f630b0fecdd7b6d51253e task 7
+* 1d4569029d7292dba28b66d550d87e808539c2db task 5
+tech@tech-work ~/first_repo $ git branch --delete feature1
+Ветка feature1 удалена (была ad9f9c6).
+tech@tech-work ~/first_repo $ git push origin --delete feature1
+Username for 'https://github.com': ssedinkin
+Password for 'https://ssedinkin@github.com': 
+To https://github.com/ssedinkin/first_repo.git
+ - [deleted]         feature1
+tech@tech-work ~/first_repo $ vim task1.1_answer 
+tech@tech-work ~/first_repo $ git tag 'v1.0'
